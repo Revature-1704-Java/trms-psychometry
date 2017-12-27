@@ -1,0 +1,11 @@
+<p>
+  table works!
+</p>
+<table>
+  <thead>
+    <th *ngFor="let header of headers">{{header}}</th>
+  </thead>
+  <tr *ngFor="let i of data">
+    <td *ngFor="let key of objectKeys(i)">{{i[key]}}</td>
+  </tr>
+</table>
