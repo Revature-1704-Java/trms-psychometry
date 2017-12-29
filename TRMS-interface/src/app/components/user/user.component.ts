@@ -8,7 +8,7 @@ import {mock} from '../../mock_reimbursements';
 })
 export class UserComponent implements OnInit {
   mock_data=mock;
-  headers=["id", "Employee_id","Request Date","Event Id","Event Type","Description","Justification","Event cost","Amount Awarded", "status", "Administrator Note","Urgency"];
+  headers=["id", "EmployeeName","Request Date","Description","Justification","Event cost","Amount Awarded" ,"Urgency"];
   constructor() { }
 
   ngOnInit() {
