@@ -7,18 +7,18 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>TRMS_backend Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <dependencies>
+<dependencies>
+  	 <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -27,16 +27,20 @@
     </dependency>
   </dependencies>
   <build>
+  	<resources>
+  	  <resource>
+       <directory>src/main/resources</directory>
+     </resource>
+  	</resources>
   	<plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
+  		<plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.5.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
      </plugins>
     <finalName>TRMS_backend</finalName>
   </build>

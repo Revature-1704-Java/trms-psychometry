@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {mock} from '../../mock_reimbursements';
+import { HttpClient } from '@angular/common/http/src/client';
+import { DataPipelineService } from '../../data-pipeline.service';
 
 @Component({
   selector: 'app-user',
@@ -7,11 +8,19 @@ import {mock} from '../../mock_reimbursements';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  mock_data=mock;
-  headers=["id", "EmployeeName","Request Date","Description","Justification","Event cost","Amount Awarded" ,"Urgency"];
-  constructor() { }
-
+  mocks:any[]=[];
+  headers:string[]=[];
+  constructor(private dataService:DataPipelineService) { }
+  getData():void {
+    this.dataService.getData().subscribe(
+      data=>{
+        this.mocks=data;
+        this.headers=Object.keys(data[0]);
+      }
+    )
+  };
   ngOnInit() {
+    this.getData();
   }
 
 }

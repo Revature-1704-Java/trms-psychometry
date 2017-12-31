@@ -1,4 +1,4 @@
-package com.revature.dataAccessObject;
+package com.revature.DAO;
 
 public interface ReimbursementDAO {
 
