@@ -8,17 +8,16 @@ import { DataPipelineService } from '../../data-pipeline.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  mocks:any[]=[];
-  headers:string[]=[];
-  constructor(private dataService:DataPipelineService) { }
-  getData():void {
+  mocks: any[] = [];
+  headers: string[] = [];
+  constructor(private dataService: DataPipelineService) { }
+  getData(): void {
     this.dataService.getData().subscribe(
-      data=>{
-        this.mocks=data;
-        this.headers=Object.keys(data[0]);
-      }
-    )
-  };
+      data => {
+        this.mocks = data;
+        this.headers = Object.keys(data[0]);
+      });
+  }
   ngOnInit() {
     this.getData();
   }

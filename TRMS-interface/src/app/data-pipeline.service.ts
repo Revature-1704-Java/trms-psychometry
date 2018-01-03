@@ -7,7 +7,7 @@ export class DataPipelineService {
 
   constructor(private http:HttpClient) { }
 
-  getData():Observable<any>{
+  getData(): Observable<any> {
     return this.http.get<any[]>("https://jsonplaceholder.typicode.com/albums");
   }
 

@@ -9,6 +9,12 @@ import java.util.Properties;
 public class ConnectionUtil {
 
 	public static Connection getConn() throws SQLException, IOException{
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		InputStream in = classloader.getResourceAsStream("connection.properties");
 		Properties prop = new Properties();

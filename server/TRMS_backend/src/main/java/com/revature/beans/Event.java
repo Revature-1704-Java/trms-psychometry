@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Event {
 	private int id, g_format_id, work_time_missed;
-	private Date date, time;
+	private Date datetime;
 	private String location,name;
 	private List<Reimbursement> reimbursements;
 	private Map<Integer, String> g_format;
@@ -15,6 +15,12 @@ public class Event {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	@Override
+	public String toString() {
+		return "Event [id=" + id + ", g_format_id=" + g_format_id + ", work_time_missed=" + work_time_missed
+				+ ", datetime=" + datetime + ", location=" + location + ", name=" + name + ", reimbursements="
+				+ reimbursements + ", g_format=" + g_format + "]";
 	}
 	public int getG_format_id() {
 		return g_format_id;
@@ -28,17 +34,11 @@ public class Event {
 	public void setWork_time_missed(int work_time_missed) {
 		this.work_time_missed = work_time_missed;
 	}
-	public Date getDate() {
-		return date;
+	public Date getDatetime() {
+		return datetime;
 	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public Date getTime() {
-		return time;
-	}
-	public void setTime(Date time) {
-		this.time = time;
+	public void setDatetime(Date datetime) {
+		this.datetime = datetime;
 	}
 	public String getLocation() {
 		return location;

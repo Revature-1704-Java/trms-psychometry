@@ -44,10 +44,11 @@ public class EmployeeDAO_jdbc implements EmployeeDAO {
 			System.out.println(ps.toString());
 			ps.executeUpdate();
 			ps.close();
+			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 
 	@Override
