@@ -1,12 +1,11 @@
-<div>
-Tuition Reimbursement Management System
-</div>
-<div>
-  <form (ngSubmit)="onSubmit()">
-    <label>user</label>
-    <input type="text" name="username" [(ngModel)]="login.username">
-    <label>password</label>
-    <input type="password" name="password" [(ngModel)]="login.password">
-    <button type="submit">submit</button>
-  </form>
+<div class="columns level">
+  <div class="column field level-item">
+    <form class="control" (ngSubmit)="onSubmit()">
+      <label class="is-size-5 has-text-weight-semibold">user</label>
+      <input class="input is-large input is-rounded" type="text" name="username" [(ngModel)]="login.username">
+      <label class="is-size-5 has-text-weight-semibold">password</label>
+      <input class="input is-large input is-rounded" type="password" name="password" [(ngModel)]="login.password">
+      <button class="button is-primary" type="submit">submit</button>
+    </form>
+  </div>
 </div>

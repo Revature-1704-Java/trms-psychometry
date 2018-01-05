@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -16,5 +17,9 @@ export class UserService {
   login(username: string, password: string): Observable<any> {
     const params: HttpParams = new HttpParams().set('username', username);
     return this.http.post<any>('http://localhost:8080/TRMS_backend/login', password, { params: params,  observe: 'response' });
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
   }
 }

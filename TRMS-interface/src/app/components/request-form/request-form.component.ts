@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Request } from '../../class/request';
 import { DataPipelineService } from '../../service/data-pipeline.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-request-form',
@@ -22,7 +23,7 @@ export class RequestFormComponent implements OnInit {
     'Presentation': 1,
     'Grades': 2
   };
-  constructor(private formBuilder: FormBuilder, private ds: DataPipelineService) {}
+  constructor(private formBuilder: FormBuilder, private ds: DataPipelineService, private router: Router) {}
 
   ngOnInit() {
     this.requestForm = this.formBuilder.group({
@@ -62,6 +63,7 @@ export class RequestFormComponent implements OnInit {
       description: form.description,
       justification: form.justification,
     };
+    this.router.navigate(['/user']);
     this.ds.postData(submit).subscribe((res)=>console.log(res));
   }
 

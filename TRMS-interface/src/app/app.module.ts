@@ -10,12 +10,12 @@ import { UserService } from './service/user.service';
 import { LoginComponent } from './components/login/login.component';
 import { TableComponent } from './components/table/table.component';
 import { UserComponent } from './components/user/user.component';
-import { DashComponent } from './components/dash/dash.component';
 import { RequestFormComponent } from './components/request-form/request-form.component';
-import { HomeComponent } from './components/home/home.component';
 
 const ngRoute: Routes = [
-    {path:'/', component:HomeComponent},
+    {path: '', component: UserComponent},
+    {path: 'login', component: LoginComponent},
+    {path: 'user', component: UserComponent}
 ];
 @NgModule({
   declarations: [
@@ -23,7 +23,6 @@ const ngRoute: Routes = [
     LoginComponent,
     TableComponent,
     UserComponent,
-    DashComponent,
     RequestFormComponent
   ],
   imports: [
@@ -31,7 +30,8 @@ const ngRoute: Routes = [
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule.forRoot(
+      ngRoute)
   ],
   providers: [DataPipelineService, UserService],
   bootstrap: [AppComponent]

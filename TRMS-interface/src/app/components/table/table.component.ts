@@ -12,7 +12,6 @@ export class TableComponent implements OnInit {
   constructor(private ds: DataPipelineService) {}
   ngOnInit() {
   }
-
   onClick(id) {
     this.ds.updateData(id).subscribe(() => {});
   }

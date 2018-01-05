@@ -1,3 +1,11 @@
-<p>
-  <app-table [data]="table" [headers]="headers" [user]="user_level"></app-table>
-</p>
+<div class="columns">
+  <div class="level">
+    <app-table [data]="table" [headers]="headers" [user]="user_level"></app-table>
+  </div>
+  <div class="level">
+    <button class="button is-primary" (click) = "addForm()">Add</button>
+  </div>
+  <div class="level">
+    <app-request-form *ngIf= "showForm"></app-request-form>
+  </div>
+</div>

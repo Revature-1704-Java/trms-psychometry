@@ -1,17 +1,18 @@
-<table>
-  <thead>
-    <th *ngFor="let header of headers">{{header}}</th>
-    <th>request date</th>
-    <th>action</th>
-  </thead>
-  <tr *ngFor="let i of data">
-    <td *ngFor="let header of headers">
-      <span>{{i[header]}}</span>
-    </td>
-    <td>{{i['request_date']|date}}</td>
-    <td>
-      {{user}} {{i.status_id}}
-      <span *ngIf="user==i['status_id']+1"><button (click)="onClick(i.r_id)">Approve</button></span>
-    </td>
-  </tr>
-</table>
+<div class="column is-12">
+  <table class="table">
+    <thead>
+      <th class="is-capitalized" *ngFor="let header of headers">{{header}}</th>
+      <th class="is-capitalized">request date</th>
+      <th class="is-capitalized">action</th>
+    </thead>
+    <tr *ngFor="let i of data">
+      <td *ngFor="let header of headers">
+        <span>{{i[header]}}</span>
+      </td>
+      <td>{{i['request_date']|date}}</td>
+      <td>
+        <span *ngIf="user==i['status_id']+1"><button (click)="onClick(i.r_id)">Approve</button></span>
+      </td>
+    </tr>
+  </table>
+</div>
