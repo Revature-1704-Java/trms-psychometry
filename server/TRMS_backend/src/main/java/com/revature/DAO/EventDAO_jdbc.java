@@ -47,22 +47,27 @@ public class EventDAO_jdbc implements EventDAO {
 	}
 
 	@Override
-	public boolean insertEvent(Event e) {
+	public int insertEvent(Event e) {
+		int newID=-1;
 		PreparedStatement ps =null;
 		try(Connection conn = ConnectionUtil.getConn()){
 			String sql="insert into event_detail(e_location, g_format_id, work_time_missed, e_datetime, e_name) values(?,?,?,?,?)";
-			ps=conn.prepareStatement(sql);
+			ps=conn.prepareStatement(sql, new String[]{"evt_id"});
 			ps.setString(1,e.getLocation());
 			ps.setInt(2,e.getG_format_id());
 			ps.setInt(3, e.getWork_time_missed());
 			ps.setTimestamp(4, new Timestamp(e.getDatetime().getTime()));
 			ps.setString(5, e.getName());
 			ps.executeUpdate();
+			ResultSet rs=ps.getGeneratedKeys();
+			while(rs.next()) {
+				newID=rs.getInt(1);
+			}
 			ps.close();
-			return true;
+			return newID;
 		}catch(Exception exp) {
 			exp.printStackTrace();
-			return false;
+			return newID;
 		}
 	}
 

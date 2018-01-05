@@ -29,22 +29,17 @@ public class JWTUtil {
 				.signWith(sa, secretBytes);
 		return Jws.compact();
 	}
-	public static credentials parseJWT(String jwt) {
+	public static credentials parseJWT(String jwt) throws SignatureException {
 		String key = "random_secret_key";
 		String base64Key = DatatypeConverter.printBase64Binary(key.getBytes());
 		byte[] secretBytes = DatatypeConverter.parseBase64Binary(base64Key);
-		try {
-		    Jwts.parser().setSigningKey(secretBytes).parseClaimsJws(jwt);
-		    Claims claims=Jwts.parser()
-		    		.setSigningKey(secretBytes)
-		    		.parseClaimsJws(jwt)
-		    		.getBody();
-		    credentials c = new credentials((Integer) claims.get("e_id"), (Integer) claims.get("e_type"));
-		    return c;
-		} catch (SignatureException e) {
-		    e.printStackTrace();
-		    return null;
-		}
+		Jwts.parser().setSigningKey(secretBytes).parseClaimsJws(jwt);
+	    Claims claims=Jwts.parser()
+	    		.setSigningKey(secretBytes)
+	    		.parseClaimsJws(jwt)
+	    		.getBody();
+	    credentials c = new credentials((Integer) claims.get("e_id"), (Integer) claims.get("e_type"));
+	    return c;
 	}
 
 }

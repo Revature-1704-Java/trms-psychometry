@@ -17,7 +17,32 @@ public class EmployeeDAO_jdbc implements EmployeeDAO {
 
 	@Override
 	public Employee getEmployee(int id) {
-		return null;
+		Employee employee=null;
+		PreparedStatement ps = null;
+		try(Connection conn = ConnectionUtil.getConn()){
+			String sql="select * from employees where e_id=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs= ps.executeQuery();
+			while(rs.next()){
+				employee=new Employee();
+				employee.setE_id(rs.getInt("e_id"));
+				employee.setE_mail(rs.getString("e_mail"));
+				employee.setEmployeeType(rs.getInt("employeetype"));
+				employee.setSu_id(rs.getInt("su_id"));
+				employee.setDh_id(rs.getInt("dh_id"));
+				employee.setUsername(rs.getString("username"));
+				employee.setPassword(rs.getString("password"));
+				employee.setReimbursements(new ArrayList<Reimbursement>());
+				employee.setFirstname(rs.getString("firstname"));
+				employee.setLastname(rs.getString("lastname"));
+			}
+			rs.close();
+			ps.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return employee;
 	}
 
 	@Override

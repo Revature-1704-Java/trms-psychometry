@@ -3,6 +3,14 @@ package com.revature.beans;
 import java.util.Date;
 
 public class Reimbursement {
+	@Override
+	public String toString() {
+		return "Reimbursement [r_id=" + r_id + ", e_id=" + e_id + ", event_id=" + event_id + ", type_id=" + type_id
+				+ ", status_id=" + status_id + ", cost=" + cost + ", awarded=" + awarded + ", urgency=" + urgency
+				+ ", description=" + description + ", justification=" + justification + ", admin_reason=" + admin_reason
+				+ ", employee_name=" + employee_name + ", type=" + type + ", status=" + status + ", request_date="
+				+ request_date + "]";
+	}
 	private int r_id, e_id, event_id, type_id, status_id;
 	private double cost, awarded;
 	private boolean urgency;

@@ -3,6 +3,7 @@ package com.revature.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,7 +78,7 @@ public class ReimbursementDAO_jdbc implements ReimbursementDAO {
 			String sql="select * from reimbursements where e_id=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, id);
-			ResultSet rs= ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				Reimbursement r=new Reimbursement();
 				r.setR_id(rs.getInt("r_id"));
@@ -94,13 +95,15 @@ public class ReimbursementDAO_jdbc implements ReimbursementDAO {
 				r.setUrgency(rs.getBoolean("urgency"));
 				r.setStatus_id(rs.getInt("status"));
 				r.setStatus(status_reference.get(rs.getInt("status")));
+				rlist.add(r);
 			}
 			rs.close();
 			ps.close();
+			return rlist;
 		}catch(Exception e) {
 			e.printStackTrace();
+			return rlist;
 		}
-		return rlist;
 	}
 
 	@Override
@@ -116,31 +119,34 @@ public class ReimbursementDAO_jdbc implements ReimbursementDAO {
 	}
 
 	@Override
-	public boolean insertReimbursement(Reimbursement request) {
+	public int insertReimbursement(Reimbursement request) {
 		PreparedStatement ps = null;
+		int newID=-1;
 		try(Connection conn = ConnectionUtil.getConn()) {
 			String sql="insert into reimbursements(e_id, "
 					+ "evt_id, e_cost, r_type, r_date, description, "
-					+ "justification, status, awarded, admin_reason, urgency)"
-					+ " values(?,?,?,?,?,?,?,?,?,?,?)";
-			ps=conn.prepareStatement(sql);
+					+ "justification, status, awarded, urgency)"
+					+ " values(?,?,?,?,?,?,?,?,?)";
+			ps=conn.prepareStatement(sql, new String[]{"r_id"});
 			ps.setInt(1, request.getE_id());
 			ps.setInt(2, request.getEvent_id());
 			ps.setDouble(3, request.getCost());
 			ps.setInt(4, request.getType_id());
-			ps.setDate(5, (java.sql.Date) request.getRequest_date());
+			ps.setTimestamp(5, new Timestamp(request.getRequest_date().getTime()));
 			ps.setString(6, request.getDescription());
 			ps.setString(7, request.getJustification());
-			ps.setInt(8,1);
-			ps.setDouble(9, request.getAwarded());
-			ps.setString(10, request.getAdmin_reason());
-			ps.setBoolean(11, request.isUrgency());
+			ps.setInt(8,request.getStatus_id());
+			ps.setBoolean(10, request.isUrgency());
 			ps.executeUpdate();
+			ResultSet rs =ps.getGeneratedKeys();
+			if(rs.next()){
+				newID=rs.getInt(1);
+			}
 			ps.close();
-			return true;
+			return newID;
 		}catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			return newID;
 		}
 	}
 

@@ -8,6 +8,8 @@ import org.junit.Test;
 import com.revature.beans.credentials;
 import com.revature.util.JWTUtil;
 
+import io.jsonwebtoken.SignatureException;
+
 public class JWTUtilTest {
 	@Before
 	public void setUp() throws Exception {
@@ -21,12 +23,12 @@ public class JWTUtilTest {
 		assertEquals(c.getE_id(),id);
 		assertEquals(c.getEmployee_type(),type);
 	}
-	@Test
+	@Test(expected =  SignatureException.class)
 	public void testTokenFailure() {
 		int id=1, type=2;
 		String x=JWTUtil.createToken(id, type);
 		x=x.substring(0,x.length()-1)+"c";
-		assertNull(JWTUtil.parseJWT(x));
+		JWTUtil.parseJWT(x);
 		
 	}
 }
