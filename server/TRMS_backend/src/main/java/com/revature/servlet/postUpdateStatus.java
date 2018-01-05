@@ -6,29 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.DAO.EmployeeDAO_jdbc;
-import com.revature.DAO.EventDAO_jdbc;
-import com.revature.DAO.ReimbursementDAO_jdbc;
-import com.revature.WEO.webUser;
 import com.revature.beans.credentials;
-import com.revature.user.BasicUser;
 import com.revature.user.User;
 import com.revature.user.UserFactory;
 import com.revature.util.JWTUtil;
 
 /**
- * Servlet implementation class auth
+ * Servlet implementation class postUpdateStatus
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/auth" })
-public class auth extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/postUpdateStatus" })
+public class postUpdateStatus extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public auth() {
+    public postUpdateStatus() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +30,7 @@ public class auth extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String JWT=null;
+		String JWT=null;
 		String authHeader = request.getHeader("Authorization");
         if ( authHeader != null && authHeader.startsWith("Bearer ") ) {
             JWT=authHeader.substring( "Bearer ".length());
@@ -46,17 +39,17 @@ public class auth extends HttpServlet {
         	try {
         		credentials c=JWTUtil.parseJWT(JWT);
         		User usr = UserFactory.getUser(c);
-        		webUser wb = new webUser(usr.getEmployee().getE_id(),usr.getEmployee().getEmployeeType(),
-        				usr.getEmployee().getFirstname(), usr.getEmployee().getE_mail(), usr.getrList());
-        		ObjectMapper mapper = new ObjectMapper();
-        		String json = mapper.writeValueAsString(wb);
-        		response.getWriter().append(json);
+        		System.out.println(Integer.parseInt(request.getParameter("id")));
+        		boolean success=usr.approveRequest(Integer.parseInt(request.getParameter("id")));
+        		String res = success ? "success" : "fail";
+        		response.getWriter().append(res);
         	}catch(Exception e){
         		e.printStackTrace();
         		response.getWriter().append("not authorized");
         	}
-        	
-        }
+		}else {
+			response.getWriter().append("something is wrong");
+		}
 	}
 
 	/**

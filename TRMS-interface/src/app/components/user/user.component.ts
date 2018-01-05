@@ -10,25 +10,19 @@ import { User } from '../../class/user';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  mocks: any[] = [];
-  headers: string[] = [];
-  user: User;
+  table: any[] = [];
+  user_level: number;
+  headers: string[] = ['employee_name', 'type', 'description', 'justification', 'cost', 'urgency', 'status'];
   constructor(private dataService: DataPipelineService, private us: UserService ) { }
   getUser(): void {
     this.us.getUser().subscribe(
       res => {
-        this.getData(res.e_id);
+        this.table = res.reimbursements;
+        this.user_level = res.employee_type;
       }
     );
   }
-  getData(id): void {
-    this.dataService.getData(id).subscribe(
-      data => {
-        console.log(data);
-        this.mocks = data;
-        this.headers = Object.keys(data[0]);
-      });
-  }
+
   ngOnInit() {
     this.getUser();
   }

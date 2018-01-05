@@ -20,7 +20,7 @@ public class JWTUtil {
 		Map<String,Object> claims = new HashMap<>();
 		claims.put("e_id", user_id);
 		claims.put("e_type", user_type);
-		Date exp = new Date((long) (System.currentTimeMillis()+900000.0));
+		Date exp = new Date((long) (System.currentTimeMillis()+1200000.0));
 		JwtBuilder Jws = Jwts.builder()
 				.setIssuedAt(now)
 				.setClaims(claims)

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Request } from '../../class/request';
+import { DataPipelineService } from '../../service/data-pipeline.service';
 
 @Component({
   selector: 'app-request-form',
@@ -16,7 +18,11 @@ export class RequestFormComponent implements OnInit {
     'Technical Training': 5,
     'Other': 6
   };
-  constructor(private formBuilder: FormBuilder) {}
+  g_formats: Object= {
+    'Presentation': 1,
+    'Grades': 2
+  };
+  constructor(private formBuilder: FormBuilder, private ds: DataPipelineService) {}
 
   ngOnInit() {
     this.requestForm = this.formBuilder.group({
@@ -28,7 +34,8 @@ export class RequestFormComponent implements OnInit {
         zip: ['', Validators.required],
         date: ['', Validators.required],
         time: ['', Validators.required],
-        work_time_loss: ['', Validators.required]
+        work_time_missed: ['', Validators.required],
+        g_format: ['']
       }),
       type: ['', Validators.required],
       cost: ['', Validators.required],
@@ -38,6 +45,24 @@ export class RequestFormComponent implements OnInit {
   }
   objectKeys(obj) {
     return Object.keys(obj);
+  }
+
+  onSubmit(f) {
+    let form = f.value;
+    let submit: Request = {
+      event: {
+        name: form.event.name,
+        location: form.event.st_address + ' ' + form.event.city + ' ' + form.event.state + ' ' + form.event.zip,
+        datetime: new Date(Date.parse(form.event.date + ':' + form.event.time)),
+        work_time_loss: form.event.work_time_missed,
+        g_format_id: this.g_formats[form.event.g_format]
+      },
+      cost: form.cost,
+      type: this.types[form.type],
+      description: form.description,
+      justification: form.justification,
+    };
+    this.ds.postData(submit).subscribe((res)=>console.log(res));
   }
 
 }
