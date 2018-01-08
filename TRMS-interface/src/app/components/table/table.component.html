@@ -1,5 +1,5 @@
-<div class="column is-12">
-  <table class="table">
+
+<table class="table">
     <thead>
       <th class="is-capitalized" *ngFor="let header of headers">{{header}}</th>
       <th class="is-capitalized">request date</th>
@@ -14,5 +14,4 @@
         <span *ngIf="user==i['status_id']+1"><button (click)="onClick(i.r_id)">Approve</button></span>
       </td>
     </tr>
-  </table>
-</div>
+</table>

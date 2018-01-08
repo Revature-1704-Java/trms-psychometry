@@ -1,11 +1,10 @@
 <div class="columns">
-  <div class="level">
+  <div class="level column is-8">
+    <div>Welcome!: {{username}}</div>
     <app-table [data]="table" [headers]="headers" [user]="user_level"></app-table>
   </div>
-  <div class="level">
-    <button class="button is-primary" (click) = "addForm()">Add</button>
-  </div>
-  <div class="level">
-    <app-request-form *ngIf= "showForm"></app-request-form>
+  <div class ="columnn is-4">
+      <button class="button is-primary" (click) = "addForm()">Add</button>
+      <app-request-form *ngIf= "showForm"></app-request-form>
   </div>
 </div>

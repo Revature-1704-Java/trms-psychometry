@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   public login = { username: '', password: '' };
   public loggedin = false;
   public error = '';
-  constructor(private us: UserService, private router:Router) { }
+  constructor(private us: UserService, private router: Router) { }
 
   ngOnInit() {
     this.us.logout();
@@ -27,11 +27,14 @@ export class LoginComponent implements OnInit {
         }else {
           this.error = 'Log in failed';
           this.loggedin = false;
+          console.log(this.loggedin);
+          this.router.navigate(['/login']);
         }
       },
       (err) => {
         this.error = 'Log in failed';
         this.loggedin = false;
+        console.log(this.loggedin);
       });
   }
 }

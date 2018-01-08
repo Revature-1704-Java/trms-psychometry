@@ -5,6 +5,7 @@ import { UserService } from '../../service/user.service';
 import { User } from '../../class/user';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import 'rxjs/add/observable/from';
 
 @Component({
   selector: 'app-user',
@@ -13,8 +14,9 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
   showForm = false;
-  table: any[] = [];
+  table: Observable<any[]>;
   user_level: number;
+  username= '';
   headers: string[] = ['employee_name', 'type', 'description', 'justification', 'cost', 'urgency', 'status'];
   constructor(private us: UserService, private router: Router) { }
   getUser(): void {
@@ -22,6 +24,7 @@ export class UserComponent implements OnInit {
       res => {
         this.table = res.reimbursements;
         this.user_level = res.employee_type;
+        this.username = res.firstName + ' ' + res.lastName;
       },
       err => {
         this.router.navigate(['/login']);

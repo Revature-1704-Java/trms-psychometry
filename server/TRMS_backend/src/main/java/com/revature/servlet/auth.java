@@ -47,7 +47,7 @@ public class auth extends HttpServlet {
         		credentials c=JWTUtil.parseJWT(JWT);
         		User usr = UserFactory.getUser(c);
         		webUser wb = new webUser(usr.getEmployee().getE_id(),usr.getEmployee().getEmployeeType(),
-        				usr.getEmployee().getFirstname(), usr.getEmployee().getE_mail(), usr.getrList());
+        				usr.getEmployee().getFirstname(), usr.getEmployee().getLastname(), usr.getrList());
         		ObjectMapper mapper = new ObjectMapper();
         		String json = mapper.writeValueAsString(wb);
         		response.getWriter().append(json);
