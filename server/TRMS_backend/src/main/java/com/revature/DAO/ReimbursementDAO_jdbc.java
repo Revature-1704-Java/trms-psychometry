@@ -258,12 +258,7 @@ public class ReimbursementDAO_jdbc implements ReimbursementDAO {
 			ps=conn.prepareStatement(sql, new String[]{"r_id"});
 			ps.setInt(1, newStatus);
 			ps.setInt(2, id);
-			ps.executeUpdate();
-			ResultSet rs =ps.getGeneratedKeys();
-			if(rs.next()){
-				newID=rs.getInt(1);
-			}
-			ps.close();
+			newID=ps.executeUpdate();
 			return newID;
 		}catch(Exception e) {
 			e.printStackTrace();

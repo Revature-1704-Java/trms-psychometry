@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { DataPipelineService } from '../../service/data-pipeline.service';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -11,10 +12,17 @@ export class TableComponent implements OnInit {
   @Input() headers: string[];
   @Input() data: Observable<any[]>;
   @Input() user: number;
-  constructor(private ds: DataPipelineService) {}
+  @Output() clicked_id: EventEmitter<number> = new EventEmitter<number>();
+  constructor(private ds: DataPipelineService, private router: Router) {}
   ngOnInit() {
   }
   onClick(id) {
-    this.ds.updateData(id).subscribe(() => {});
+    this.router.navigate(['/user']);
+    this.ds.updateData(id).subscribe((res) => {
+      console.log(res);
+    });
+  }
+  onCellClick(id) {
+    this.clicked_id.emit(id);
   }
 }

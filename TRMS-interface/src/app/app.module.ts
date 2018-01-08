@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { TableComponent } from './components/table/table.component';
 import { UserComponent } from './components/user/user.component';
 import { RequestFormComponent } from './components/request-form/request-form.component';
+import { DetailsComponent } from './components/details/details.component';
 
 const ngRoute: Routes = [
     {path: '', component: UserComponent},
@@ -23,7 +24,8 @@ const ngRoute: Routes = [
     LoginComponent,
     TableComponent,
     UserComponent,
-    RequestFormComponent
+    RequestFormComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -35,7 +35,7 @@ public class BenCoUser extends User {
 		r.setDescription(description);
 		r.setJustification(justification);
 		r.setStatus_id(4);
-		long days = TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis()-e_datetime.getTime());
+		long days = TimeUnit.MILLISECONDS.toDays(e_datetime.getTime()-System.currentTimeMillis());
 		if((int) days<14) {
 			r.setUrgency(true);
 		}else {

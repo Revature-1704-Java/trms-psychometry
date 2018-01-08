@@ -1,5 +1,6 @@
 package com.revature.user;
 
+import java.io.Console;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +34,11 @@ public class BasicUser extends User {
 		r.setDescription(description);
 		r.setJustification(justification);
 		r.setStatus_id(1);
-		long days = TimeUnit.MILLISECONDS.toDays(System.currentTimeMillis()-e_datetime.getTime());
+		if(employee.getSu_id()==employee.getDh_id()){
+			r.setStatus_id(2);
+		}
+		long days = TimeUnit.MILLISECONDS.toDays(e_datetime.getTime()-System.currentTimeMillis());
+		System.out.println(days);
 		if((int) days<14) {
 			r.setUrgency(true);
 		}else {

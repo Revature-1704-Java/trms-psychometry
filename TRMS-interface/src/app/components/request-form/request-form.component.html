@@ -1,6 +1,6 @@
 <form [formGroup]="requestForm" (ngSubmit)="onSubmit(requestForm)">
   <div formGroupName="event">
-    <div class="field"><label>Name: </label>
+    <div class="field"><label>Event Name: </label>
       <input type="text" formControlName="name"/></div>
     <div class="field"><label>Street Address: </label>
       <input type="text" formControlName="st_address"/></div>
@@ -18,7 +18,7 @@
       <select formControlName="g_format" required>
         <option *ngFor = "let f of objectKeys(g_formats)" [value]="f">{{f}}</option>
       </select></div>
-    <div class="field"><label>Work Hour Loss: </label>
+    <div class="field"><label>Work Hour Loss(hours): </label>
       <input type="number" formControlName="work_time_missed"/></div>   
     </div>
   <div class="field"><label>Type:</label>

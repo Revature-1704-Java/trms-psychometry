@@ -27,6 +27,7 @@ public class EventDAO_jdbc implements EventDAO {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
 				e.setId(rs.getInt("evt_id"));
+				e.setLocation(rs.getString("e_location"));
 				e.setG_format_id(rs.getInt("g_format_id"));
 				e.setWork_time_missed(rs.getInt("work_time_missed"));
 				e.setDatetime((Date) rs.getTimestamp("E_DATETIME"));

@@ -1,0 +1,32 @@
+<div *ngIf="EventDetail | async; let Event">
+    <div class="columns">
+        <div class="column">
+            Event Name: {{Event.name}}
+          </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+          Location: {{Event.location}}
+          </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            Date: {{Event.datetime| date }}
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            Time: {{Event.datetime| date:"HH:mm" }}
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            Work Hour loss: {{Event.work_time_loss}} Hours
+          </div>
+    </div>
+    <div class="columns">
+        <div class="column">
+            Grade Format: {{g_formats[Event.g_format_id]}}
+          </div>
+    </div>
+</div>

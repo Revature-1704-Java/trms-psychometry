@@ -63,8 +63,8 @@ export class RequestFormComponent implements OnInit {
       description: form.description,
       justification: form.justification,
     };
-    this.router.navigate(['/user']);
     this.ds.postData(submit).subscribe((res)=>console.log(res));
+    this.router.navigate(['/user']);
   }
 
 }

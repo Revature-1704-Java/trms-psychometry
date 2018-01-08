@@ -6,7 +6,7 @@
       <th class="is-capitalized">action</th>
     </thead>
     <tr *ngFor="let i of data">
-      <td *ngFor="let header of headers">
+      <td *ngFor="let header of headers" (click)="onCellClick(i.event_id)">
         <span>{{i[header]}}</span>
       </td>
       <td>{{i['request_date']|date}}</td>

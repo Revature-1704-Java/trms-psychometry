@@ -10,8 +10,10 @@ export class DataPipelineService {
   constructor(private http: HttpClient) { }
 
   getData(id: number): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+                               .set('Authorization', 'Bearer ' + localStorage.getItem('token'));
     const params: HttpParams = new HttpParams().set('id', String(id));
-    return this.http.get<any[]>('http://localhost:8080/TRMS_backend/getReimbursements', {params});
+    return this.http.get<any[]>('http://localhost:8080/TRMS_backend/getEventDetail', {headers, params});
   }
   postData(request: Request): Observable<Request> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json')

@@ -1,10 +1,28 @@
 <div class="columns">
-  <div class="level column is-8">
-    <div>Welcome!: {{username}}</div>
-    <app-table [data]="table" [headers]="headers" [user]="user_level"></app-table>
+  <div class="column is-12 level raised">
+    <button class="button is-primary" (click)="addForm()">Add</button>
+    <button class="button is-primary" (click)="logOut()">Logout</button>
+    <span class="is-capitalized is-size-5">Welcome! {{username}}</span>
   </div>
-  <div class ="columnn is-4">
-      <button class="button is-primary" (click) = "addForm()">Add</button>
-      <app-request-form *ngIf= "showForm"></app-request-form>
+</div>
+<div class="columns">
+  <div class="level column is-four-fifths raised">
+    <div class="columns">
+      <div class="column">
+        <app-table [data]="table" [headers]="headers" [user]="user_level" (clicked_id)=handleCellClick($event)></app-table>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="columns">
+      <div class="column">
+        <app-request-form *ngIf="showForm"></app-request-form>
+      </div>
+    </div>
+    <div class="columns" *ngIf="!showForm">
+      <div class="column">
+        <app-details [clicked_id]="clicked_id"></app-details>
+      </div>
+    </div>
   </div>
 </div>
